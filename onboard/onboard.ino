@@ -1,8 +1,11 @@
 #include "DHT.h"
+#include "BUZZ.hpp"
 #define DHTPIN 2
 #define DHTTYPE DHT22
 
+// Buzzer added
 DHT dht(DHTPIN, DHTTYPE);
+BUZZ buzzer(10);
 
 void setup(){
  Serial.begin(9600); 
