@@ -10,6 +10,7 @@
 #define BUZZ_hpp
 
 #include <stdio.h>
+#include <Arduino.h>
 
 class BUZZ
 {
