@@ -1,11 +1,18 @@
 #include "DHT.h"
 #include "BUZZ.hpp"
+#include "SERVO.h"
+
+// Pin Define
 #define DHTPIN 2
+#define BUZZPIN 1 // VALOR A CORRIGIR
+#define SERVOPIN 1 // VALOR A CORRIGIR
+
 #define DHTTYPE DHT22
 
-// Buzzer added
+// Create Objects
 DHT dht(DHTPIN, DHTTYPE);
-BUZZ buzzer(10);
+BUZZ buzzer(BUZZPIN);
+SERVO myServo(SERVOPIN);
 
 void setup(){
  Serial.begin(9600); 
