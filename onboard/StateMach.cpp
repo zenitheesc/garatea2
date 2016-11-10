@@ -3,7 +3,7 @@
 void StateMach::Main_State(){
 
     this->_myServo.CloseWindow();
-//    this->_dht.baud(9600);
+    Serial.println("oiiii");
     this->_climbingMode = true;
 
     // Loop de execucao dos modos
@@ -29,7 +29,7 @@ void StateMach::ClimbingMode(){
     delay(0.05);
     //this->_tempex.readTEMPEX();
     delay(0.05);
-    this->_gps.readGPS();
+    this->_gps.read_GPS();
     delay(0.05);
     //writeData(); // gravar dados.txt
     if (this->_gps.get_altitude() > 20000.0 /*|| barAltitude > 20000.0*/) {
@@ -54,7 +54,7 @@ void StateMach::ExposureMode(){
     delay(0.05);
     //this->_tempex.readTEMPEX();
     delay(0.05);
-    this->_gps.readGPS();
+    this->_gps.read_GPS();
     delay(0.05);
     
     if (this->_gps.get_altitude() > 25000.0 /*|| barAltitude > 25000.0*/) {
@@ -81,7 +81,7 @@ void StateMach::FallingMode()
     delay(0.05);
     //this->_tempex.readTEMPEX();
     delay(0.05);
-    this->_gps.readGPS();
+    this->_gps.read_GPS();
     delay(0.05);
 
     /*if (hasLanded()) {

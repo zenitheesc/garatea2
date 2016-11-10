@@ -5,11 +5,10 @@
 #include "hDHT.hpp"
 #include "BUZZ.hpp"
 #include "SERVO.h"
-#include "GPS.h"
+#include "hGPS.hpp"
 #include "UVX.h"
 #include "hDS18B20.hpp"
-#include "OneWire.h"
-//#include "TEMPEX.h"
+//#include "OneWire.h"
 
 // Pin Define
 #define DHTPIN 1 // Valor a ser corrigido
@@ -27,14 +26,9 @@ private:
 	hDHT _dht;
 	BUZZ _buzzer;
 	SERVO _myServo;
-	UVX _uvx;
-	GPS _gps;
-	//TEMPEX _tempex();
-	//OneWire o;
+	UVX _uvx;	
 	hDS18B20 _ds18b20;
-
-
-
+	hGPS _gps;
 
 	// Flags de modos de operacao
 	bool _climbingMode = false;
