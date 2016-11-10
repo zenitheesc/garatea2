@@ -8,7 +8,7 @@
 #define SERVOMAX 180 
 #define SERVODELAY 0.05
 
-class SERVO{
+class SERVO : public Servo {
 private:
 	Servo myservo;
 

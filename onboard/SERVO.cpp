@@ -1,6 +1,6 @@
 #include "SERVO.h"
 
-SERVO::SERVO(int pin){	
+SERVO::SERVO(int pin) : myservo(){	
 	this->myservo.attach(pin);
 }
 
