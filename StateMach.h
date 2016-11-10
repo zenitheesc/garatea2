@@ -7,6 +7,8 @@
 #include "SERVO.h"
 #include "GPS.h"
 #include "UVX.h"
+#include "hDS18B20.hpp"
+#include "OneWire.h"
 //#include "TEMPEX.h"
 
 // Pin Define
@@ -28,6 +30,10 @@ private:
 	UVX _uvx;
 	GPS _gps;
 	//TEMPEX _tempex();
+	//OneWire o;
+	hDS18B20 _ds18b20;
+
+
 
 
 	// Flags de modos de operacao
@@ -37,7 +43,9 @@ private:
 	bool _rescueMode = false;
 
 public:
-	StateMach(): _dht(DHTPIN, DHTTYPE), _buzzer(BUZZPIN), _myServo(SERVOPIN), _uvx(UVA_pin, UVB_pin, UVC_pin), _gps() {};
+	StateMach(): _dht(DHTPIN, DHTTYPE), _buzzer(BUZZPIN), 
+	_myServo(SERVOPIN), _uvx(UVA_pin, UVB_pin, UVC_pin),
+	 _gps(),/* o(1),*/ _ds18b20() {};
 
 	void ClimbingMode();
 	void ExposureMode();

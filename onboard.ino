@@ -4,7 +4,6 @@
 StateMach estados;
 
 void setup(){
-    
     Serial.begin(9600); 
     wdt_enable(WDTO_4S); // Computador ira reiniciar se o timer nao for resetado em 4s
 }
