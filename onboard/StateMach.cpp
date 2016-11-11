@@ -1,10 +1,10 @@
 #include "StateMach.h"
 
 void StateMach::Main_State(){
-
-    this->_myServo.CloseWindow();
-    Serial.println("oiiii");
-    this->_climbingMode = true;
+    _hms5611.startBar();
+    _myServo.CloseWindow();    
+    _climbingMode = true;
+    Serial.println("Estou no Main state");
 
     // Loop de execucao dos modos
     while(true) {
@@ -16,21 +16,22 @@ void StateMach::Main_State(){
 }
 
 void StateMach::ClimbingMode(){
-	this->_buzzer.beeper(1); // Pisca Buzzer 1 vez pra sabermos que estamos no modo 1 
-
-    delay(0.05);
+    Serial.println("Estou no ClimbingMode");
+    Serial.println(_buzzer.getBuzzPin());
+	_buzzer.beep(); // Pisca Buzzer 1 vez pra sabermos que estamos no modo 1 
+    delay(5);
     this->_dht.readDHT();
-    delay(0.05);
-    //readBarometer();
+    delay(5);
+    _hms5611.readAll();
     //delay(0.05);
     //readCompass();
-    delay(0.05);
+    delay(5);
     this->_uvx.readUVX();
-    delay(0.05);
+    delay(5);
     //this->_tempex.readTEMPEX();
-    delay(0.05);
+    delay(5);
     this->_gps.read_GPS();
-    delay(0.05);
+    delay(5);
     //writeData(); // gravar dados.txt
     if (this->_gps.get_altitude() > 20000.0 /*|| barAltitude > 20000.0*/) {
         this->_climbingMode = false;        
@@ -43,19 +44,19 @@ void StateMach::ExposureMode(){
 
     this->_buzzer.beeper(2); // Pisca Buzzer 2 vezes pra sabermos que estamos no modo 2
     
-    delay(0.05);
+    delay(5);
     this->_dht.readDHT();
-    delay(0.05);
-    //readBarometer();
+    delay(5);
+    _hms5611.readAll();
     //delay(0.05);
     //readCompass();
-    delay(0.05);
+    delay(5);
     this->_uvx.readUVX();
-    delay(0.05);
+    delay(5);
     //this->_tempex.readTEMPEX();
-    delay(0.05);
+    delay(5);
     this->_gps.read_GPS();
-    delay(0.05);
+    delay(5);
     
     if (this->_gps.get_altitude() > 25000.0 /*|| barAltitude > 25000.0*/) {
         //if(isFallingBAR() || isFallingGPS()) { // Funcao que comparando a maxima altitude registrada e a altitude atual, retorna se a sonda ta caindo ou nao
@@ -70,19 +71,19 @@ void StateMach::FallingMode()
 {
     this->_buzzer.beeper(3); // Pisca Buzzer 3 vezes pra sabermos que estamos no modo 3
 
-    delay(0.05);
+    delay(5);
     this->_dht.readDHT();
-    delay(0.05);
-    //readBarometer();
+    delay(5);
+    _hms5611.readAll();
     //delay(0.05);
     //readCompass();
-    delay(0.05);
+    delay(5);
     this->_uvx.readUVX();
-    delay(0.05);
+    delay(5);
     //this->_tempex.readTEMPEX();
-    delay(0.05);
+    delay(5);
     this->_gps.read_GPS();
-    delay(0.05);
+    delay(5);
 
     /*if (hasLanded()) {
         this->_fallingMode = false;

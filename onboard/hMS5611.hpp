@@ -7,8 +7,8 @@ private:
 
     double RealTemp;
 	double RealPress;
-
-	float Altitude;     
+	float Altitude;  
+	   
 public:
 	hMS5611() : MS5611() {};
 

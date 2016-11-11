@@ -9,7 +9,7 @@
 #include "BUZZ.hpp"
 
 BUZZ::BUZZ(int buzzPin){
-    //pinMode(buzzPin, OUTPUT);
+    pinMode(buzzPin, OUTPUT);
     this->buzzPin = buzzPin;
 }
 
@@ -18,7 +18,8 @@ BUZZ::~BUZZ(){
 }
 
 void BUZZ::beeper(int n){
-	for (int i = 0; i < n; i++) {
+    Serial.println("Estou no beeper");
+	for (int i = 0; i <= n; i++) {
         digitalWrite(this->buzzPin, HIGH);
         delay(0.5);
         digitalWrite(this->buzzPin, LOW);
@@ -27,18 +28,22 @@ void BUZZ::beeper(int n){
     }
 }
 
-void BUZZ::beep(void){
-    digitalWrite(this->buzzPin, HIGH);
-    delay(0.5);
-    digitalWrite(this->buzzPin, LOW);
-    delay(0.5);
-    digitalWrite(this->buzzPin, HIGH);
-    delay(0.5);
-    digitalWrite(this->buzzPin, LOW);
-    delay(0.5);
-    digitalWrite(this->buzzPin, HIGH);
-    delay(2);
-    digitalWrite(this->buzzPin, LOW); // Finish beep with low state.
+void BUZZ::beep(){
+    
+    buzzPin = 2;
+    digitalWrite(buzzPin, HIGH);
+
+    delay(200);
+    digitalWrite(buzzPin, LOW);
+    delay(200);
+    digitalWrite(buzzPin, HIGH);
+    delay(200);
+    digitalWrite(buzzPin, LOW);
+    delay(200);
+    digitalWrite(buzzPin, HIGH);
+    delay(400);
+    digitalWrite(buzzPin, LOW); // Finish beep with low state.
+    Serial.println("Estou no beep");
 }
 
 int BUZZ::getBuzzPin(){
