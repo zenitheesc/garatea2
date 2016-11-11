@@ -9,6 +9,7 @@
 #include "UVX.h"
 #include "hDS18B20.hpp"
 #include "hMS5611.hpp"
+#include "hLSM303.hpp"
 //#include "OneWire.h"
 
 // Pin Define
@@ -31,6 +32,8 @@ private:
 	hDS18B20 _ds18b20;
 	hGPS _gps;
 	hMS5611 _hms5611;
+	hDS18B20 _hds18b20;
+	hLSM303 _hlsm303;
 
 	// Flags de modos de operacao
 	bool _climbingMode = false;
@@ -41,7 +44,7 @@ private:
 public:
 	StateMach(): _dht(DHTPIN, DHTTYPE), _buzzer(BUZZPIN), 
 	_myServo(SERVOPIN), _uvx(UVA_pin, UVB_pin, UVC_pin),
-	 _gps(),/* o(1),*/ _ds18b20(), _hms5611() {};
+	 _gps(), /* o(1),*/ _ds18b20(), _hms5611(), _hds18b20(), _hlsm303() {};
 
 	void ClimbingMode();
 	void ExposureMode();
