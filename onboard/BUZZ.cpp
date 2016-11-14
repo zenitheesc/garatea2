@@ -6,7 +6,7 @@
 //  Copyright © 2016 Danilo Oliveira. All rights reserved.
 //
 
-#include "BUZZ.hpp"
+#include "BUZZ.h"
 
 BUZZ::BUZZ(int buzzPin){
     pinMode(buzzPin, OUTPUT);

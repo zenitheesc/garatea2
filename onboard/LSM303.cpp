@@ -1,7 +1,4 @@
 #include "LSM303.h"
-#include <Wire.h>
-#include <math.h>
-
 // Defines ////////////////////////////////////////////////////////////////
 
 // The Arduino two-wire interface uses a 7-bit number for the address,

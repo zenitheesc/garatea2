@@ -1,9 +1,11 @@
 #include "StateMach.h"
 
 void StateMach::Main_State(){
-    _hms5611.startBar();
-    _hds18b20.start();
-    _hlsm303.start();
+
+    //_hms5611.startBar();
+    
+    //_hds18b20.start();
+    //_hlsm303.start();
     _myServo.CloseWindow();    
     _climbingMode = true;
     Serial.println("Estou no Main state");
@@ -18,8 +20,7 @@ void StateMach::Main_State(){
 }
 
 void StateMach::ClimbingMode(){
-    Serial.println("Estou no ClimbingMode");
-    Serial.println(_buzzer.getBuzzPin());
+    Serial.println("Estou no ClimbingMode");    
 	_buzzer.beep(); // Pisca Buzzer 1 vez pra sabermos que estamos no modo 1 
     delay(5);
     this->_dht.readDHT();

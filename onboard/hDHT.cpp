@@ -1,4 +1,4 @@
-#include "hDHT.hpp"
+#include "hDHT.h"
 #define DHTTYPE DHT22
 
 

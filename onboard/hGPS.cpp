@@ -1,4 +1,4 @@
-#include "hGPS.hpp"
+#include "hGPS.h"
 
 void hGPS::read_GPS(){
 	this->begin(9600);

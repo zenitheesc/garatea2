@@ -1,7 +1,7 @@
-#ifndef hGPS_hpp
-#define hGPS_hpp
+#ifndef hGPS_h
+#define hGPS_h
 
-#include <Adafruit_GPS.h>
+#include "Adafruit_GPS.h"
 #include <HardwareSerial.h>
 
 #define GPS_TX 3
@@ -14,7 +14,7 @@ private:
 public:
 	hGPS(): Adafruit_GPS(&serial) {
 	};
-	void hGPS::hparse();
+	void hparse();
 	void read_GPS();
 	float get_latitude();
 	float get_longitude();

@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "DHT.hpp"
+#include "DHT.h"
 
 class hDHT : public DHT{
 private:

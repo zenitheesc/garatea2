@@ -1,4 +1,4 @@
-#include "hDS18B20.hpp"
+#include "hDS18B20.h"
 
 void hDS18B20::start(){
 	this->begin();

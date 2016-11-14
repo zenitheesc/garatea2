@@ -2,14 +2,14 @@
 #define StateMach_h
 
 #include <Arduino.h>
-#include "hDHT.hpp"
-#include "BUZZ.hpp"
-#include "SERVO.h"
-#include "hGPS.hpp"
+#include "hDHT.h"
+#include "BUZZ.h"
+#include "hServo.h"
+#include "hGPS.h"
 #include "UVX.h"
-#include "hDS18B20.hpp"
-#include "hMS5611.hpp"
-#include "hLSM303.hpp"
+#include "hDS18B20.h"
+#include "hMS5611.h"
+#include "hLSM303.h"
 //#include "OneWire.h"
 
 // Pin Define
@@ -27,7 +27,7 @@ private:
 	// Create Objects
 	hDHT _dht;
 	BUZZ _buzzer;
-	SERVO _myServo;
+	hServo _myServo;
 	UVX _uvx;	
 	hDS18B20 _ds18b20;
 	hGPS _gps;
@@ -44,7 +44,7 @@ private:
 public:
 	StateMach(): _dht(DHTPIN, DHTTYPE), _buzzer(BUZZPIN), 
 	_myServo(SERVOPIN), _uvx(UVA_pin, UVB_pin, UVC_pin),
-	 _gps(), /* o(1),*/ _ds18b20(), _hms5611(), _hds18b20(), _hlsm303() {};
+	 _gps(), _ds18b20(), _hms5611(), _hds18b20(), _hlsm303() {};
 
 	void ClimbingMode();
 	void ExposureMode();

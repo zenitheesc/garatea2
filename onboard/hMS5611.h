@@ -1,3 +1,6 @@
+#ifndef hMS5611_h
+#define hMS5611_h
+
 #include "MS5611.h"
 
 class hMS5611 : public MS5611{
@@ -27,3 +30,4 @@ public:
 	double getRealPress();
 	float getAltitude();  
 };
+#endif

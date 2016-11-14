@@ -4,7 +4,7 @@ MIT license
 written by Adafruit Industries
 */
 
-#include "DHT.hpp"
+#include "DHT.h"
 
 #define MIN_INTERVAL 2000
 

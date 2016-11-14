@@ -1,4 +1,4 @@
-#include "hLSM303.hpp"
+#include "hLSM303.h"
 #define R 10
 
 void hLSM303::start(){

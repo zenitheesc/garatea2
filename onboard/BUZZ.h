@@ -6,8 +6,8 @@
 //  Copyright © 2016 Danilo Oliveira. All rights reserved.
 //
 
-#ifndef BUZZ_hpp
-#define BUZZ_hpp
+#ifndef BUZZ_h
+#define BUZZ_h
 
 #include <stdio.h>
 #include <Arduino.h>
