@@ -4,19 +4,19 @@
 #include <Arduino.h>
 #include "Servo.h"
 
+#define SERVOPIN 9 // Valor a ser corrigido
 #define SERVOMIN 0
 #define SERVOMAX 180 
-#define SERVODELAY 0.05
 
 class hServo : public Servo {
 private:
-	Servo myservo;
-
+	bool attached = false;
 public:
-	hServo(int pin);
+	hServo() : Servo() {};
 	//~SERVO();
 	void OpenWindow();
 	void CloseWindow();	
+	void setup(int pin);
 };
 
 

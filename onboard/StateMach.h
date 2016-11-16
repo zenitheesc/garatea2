@@ -10,12 +10,11 @@
 #include "hDS18B20.h"
 #include "hMS5611.h"
 #include "hLSM303.h"
-//#include "OneWire.h"
+#include "hComm.h"
 
 // Pin Define
 #define DHTPIN 10 // Valor a ser corrigido
 #define BUZZPIN 11 // Valor a ser corrigido
-#define SERVOPIN 3 // Valor a ser corrigido
 #define UVA_pin 4 // Valor a ser corrigido
 #define UVB_pin 5 // Valor a ser corrigido
 #define UVC_pin 6 // Valor a ser corrigido
@@ -33,6 +32,7 @@ private:
 	hMS5611 _hms5611;
 	hDS18B20 _hds18b20;
 	hLSM303 _hlsm303;
+	hComm _hcomm;
 
 	// Flags de modos de operacao
 	bool _climbingMode = false;
@@ -42,8 +42,8 @@ private:
 
 public:
 	StateMach(): _dht(DHTPIN, DHTTYPE), _buzzer(BUZZPIN), 
-	_myServo(SERVOPIN), _uvx(UVA_pin, UVB_pin, UVC_pin),
-	 _gps(), _hms5611() , _hds18b20(), _hlsm303(){};
+	_myServo(), _uvx(UVA_pin, UVB_pin, UVC_pin),
+	 _gps(), _hms5611() , _hds18b20(), _hlsm303(), _hcomm(){};
 
 	void ClimbingMode();
 	void ExposureMode();
