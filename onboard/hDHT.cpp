@@ -4,13 +4,12 @@
 
 
 void hDHT::readDHT(void)
-{
-    boolean err = this->read();
-    if (!err) {
-        Temp = this->readTemperature();
-        Humd = this->readHumidity();
-        HIdx = this->computeHeatIndex(Temp, Humd, false);
-    }
+{	Serial.println("lendo dht");
+	this->read();
+	Temp = this->readTemperature();
+	Humd = this->readHumidity();
+	HIdx = this->computeHeatIndex(Temp, Humd, false);
+
 }
 
 float hDHT::getTemp(){

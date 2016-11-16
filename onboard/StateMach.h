@@ -13,8 +13,8 @@
 //#include "OneWire.h"
 
 // Pin Define
-#define DHTPIN 1 // Valor a ser corrigido
-#define BUZZPIN 2 // Valor a ser corrigido
+#define DHTPIN 10 // Valor a ser corrigido
+#define BUZZPIN 11 // Valor a ser corrigido
 #define SERVOPIN 3 // Valor a ser corrigido
 #define UVA_pin 4 // Valor a ser corrigido
 #define UVB_pin 5 // Valor a ser corrigido
@@ -29,7 +29,6 @@ private:
 	BUZZ _buzzer;
 	hServo _myServo;
 	UVX _uvx;	
-	hDS18B20 _ds18b20;
 	hGPS _gps;
 	hMS5611 _hms5611;
 	hDS18B20 _hds18b20;
@@ -44,7 +43,7 @@ private:
 public:
 	StateMach(): _dht(DHTPIN, DHTTYPE), _buzzer(BUZZPIN), 
 	_myServo(SERVOPIN), _uvx(UVA_pin, UVB_pin, UVC_pin),
-	 _gps(), _ds18b20(), _hms5611(), _hds18b20(), _hlsm303() {};
+	 _gps(), _hms5611() , _hds18b20(), _hlsm303(){};
 
 	void ClimbingMode();
 	void ExposureMode();

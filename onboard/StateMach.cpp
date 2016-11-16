@@ -2,10 +2,10 @@
 
 void StateMach::Main_State(){
 
-    //_hms5611.startBar();
-    
-    //_hds18b20.start();
-    //_hlsm303.start();
+    _hms5611.startBar();
+    _dht.begin();
+    _hds18b20.start();
+    _hlsm303.start();
     _myServo.CloseWindow();    
     _climbingMode = true;
     Serial.println("Estou no Main state");
@@ -23,18 +23,26 @@ void StateMach::ClimbingMode(){
     Serial.println("Estou no ClimbingMode");    
 	_buzzer.beep(); // Pisca Buzzer 1 vez pra sabermos que estamos no modo 1 
     delay(5);
-    this->_dht.readDHT();
+    _dht.readDHT();
+    Serial.println(_dht.getTemp());
+    Serial.println(_dht.getHumd());
+    Serial.println(_dht.getHIdx());
     delay(5);
-    _hms5611.readAll();
-    //delay(0.05);
-    _hlsm303.readAc();
-    delay(5);
-    this->_uvx.readUVX();
+    _hms5611.readAll(); // OK funcionando
+    Serial.println(_hms5611.getAltitude());
+    Serial.println(_hms5611.getRealTemp());
+    Serial.println(_hms5611.getRealPress());
     delay(5);
     _hds18b20.leTemperatura();
+    Serial.println(_hds18b20.getTemperatura());    
     delay(5);
-    this->_gps.read_GPS();
+    _hlsm303.readAc();
+    Serial.println(_hlsm303.getMod());
     delay(5);
+    //this->_uvx.readUVX();
+    delay(5);
+    //this->_gps.read_GPS();
+    delay(7000);
     //writeData(); // gravar dados.txt
     if (this->_gps.get_altitude() > 20000.0 /*|| barAltitude > 20000.0*/) {
         this->_climbingMode = false;        
