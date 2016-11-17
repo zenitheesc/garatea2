@@ -9,6 +9,8 @@ private:
 public:
 	hSD(int pin);
 	void Write(String s);
+	void Write_GPS(int altitude);
+	void Close();
 };
 
 

@@ -11,6 +11,7 @@
 #include "hMS5611.h"
 #include "hLSM303.h"
 #include "hComm.h"
+#include "hSD.h"
 
 // Pin Define
 #define DHTPIN 10 // Valor a ser corrigido
@@ -18,6 +19,7 @@
 #define UVA_pin 4 // Valor a ser corrigido
 #define UVB_pin 5 // Valor a ser corrigido
 #define UVC_pin 6 // Valor a ser corrigido
+#define SD_PIN 1
 
 #define DHTTYPE DHT22
 
@@ -33,6 +35,7 @@ private:
 	hDS18B20 _hds18b20;
 	hLSM303 _hlsm303;
 	hComm _hcomm;
+	hSD _hsd;
 
 	// Flags de modos de operacao
 	bool _climbingMode = false;
@@ -43,7 +46,7 @@ private:
 public:
 	StateMach(): _dht(DHTPIN, DHTTYPE), _buzzer(BUZZPIN), 
 	_myServo(), _uvx(UVA_pin, UVB_pin, UVC_pin),
-	 _gps(), _hms5611() , _hds18b20(), _hlsm303(), _hcomm(){};
+	 _gps(), _hms5611() , _hds18b20(), _hlsm303(), _hcomm(), _hsd(SD_PIN){};
 
 	void ClimbingMode();
 	void ExposureMode();

@@ -6,6 +6,7 @@ void StateMach::Main_State(){
     //_dht.begin();
     //_hds18b20.start();
     //_hlsm303.start();
+    _gps.begin(9600);
     _myServo.CloseWindow();
     Serial.println(_myServo.read());
     //_myServo.detach();  
@@ -25,7 +26,7 @@ void StateMach::ClimbingMode(){
     Serial.println("Estou no ClimbingMode");    
 	_buzzer.beep(); // Pisca Buzzer 1 vez pra sabermos que estamos no modo 1 
     delay(5);
-    _dht.readDHT();
+    /*_dht.readDHT();
     Serial.println(_dht.getTemp());
     Serial.println(_dht.getHumd());
     Serial.println(_dht.getHIdx());
@@ -42,10 +43,10 @@ void StateMach::ClimbingMode(){
     Serial.println(_hlsm303.getMod());
     delay(5);
     //this->_uvx.readUVX();
-    delay(5);
-    //this->_gps.read_GPS();
+    delay(5);*/
+    this->_gps.read_GPS();
     delay(3000);
-    //writeData(); // gravar dados.txt
+    _hsd.Write_GPS(_gps.get_altitude()); // gravar dados.txt
     /*if (this->_gps.get_altitude() > 20000.0 || barAltitude > 20000.0) {
         this->_climbingMode = false;        
         this->_exposureMode = true;

@@ -9,7 +9,7 @@
 
 class hGPS : public Adafruit_GPS {
 private:	
-	HardwareSerial serial=Serial;
+	HardwareSerial serial = Serial;
 	
 public:
 	hGPS(): Adafruit_GPS(&serial) {
