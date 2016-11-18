@@ -4,13 +4,15 @@
 void hLSM303::start(){
 	this->init();
   	this->enableDefault();
+
+  	X_ac = 10.0;
+	Y_ac = 10.0;
+	Z_ac = 10.0;
+	Mod = 10.0;
 }
 
 void hLSM303::readAc(){
-	X_ac = 0;
-	Y_ac = 0;
-	Z_ac = 0;
-	Mod = 0;
+
 
  	for(int i = 0; i < R; i++){
  		this->read();

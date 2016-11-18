@@ -1,7 +1,7 @@
 #include "StateMach.h"
 
 void StateMach::Main_State(){
-
+/*
     _hms5611.startBar();
     _dht.begin();
     _hds18b20.start();
@@ -11,6 +11,9 @@ void StateMach::Main_State(){
     Serial.println(_myServo.read());
     _myServo.detach();  
     _climbingMode = true;
+
+    Wire.begin();
+
     Serial.println(F("Estou no Main state"));
 
     // Loop de execucao dos modos
@@ -19,7 +22,13 @@ void StateMach::Main_State(){
         if(this->_exposureMode) ExposureMode();
         if(this->_fallingMode) FallingMode();
         if(this->_rescueMode) RescueMode();
-    }
+    }*/
+
+    Wire.begin();
+    _hlsm303.start();
+    _hlsm303.readAc();
+    TC.saveData(_hlsm303.getMod());
+    TC.transmission(TC.getStringTel());
 }
 
 void StateMach::ClimbingMode(){
@@ -60,11 +69,13 @@ void StateMach::ExposureMode(){
 
     _buzzer.beeper(2); // Pisca Buzzer 2 vezes pra sabermos que estamos no modo 2
     
+
+    ///VERIFICAR SE CADA SENSOR ESTÁ DISPONIVEL ANTES DE REALIZAR A LEITURA
     delay(5);
     _dht.readDHT();
     delay(5);
     _hms5611.readAll();
-    delay(0.05);
+    delay(5);
     _hlsm303.readAc();
     delay(5);
     _uvx.readUVX();
@@ -73,17 +84,32 @@ void StateMach::ExposureMode(){
     delay(5);
     _gps.read_GPS();
     delay(5);
-    
-    if (this->_gps.get_altitude() > 25000.0 /*|| barAltitude > 25000.0*/) {
-        //if(isFallingBAR() || isFallingGPS()) { // Funcao que comparando a maxima altitude registrada e a altitude atual, retorna se a sonda ta caindo ou nao
+/*
+    //ATUALIZAR OS DADOS DOS VERIFICADORES DE COEF ANGULAR
+    IF.
+
+    //DETECTOU QUEDA -> MOMENTO EM QUE A TAMPA FECHA    
+    if (this->_gps.get_altitude() > 25000.0 || barAltitude > 25000.0) {
+        if(IF.isFallingBAR() || IF.isFallingGPS() || ND.isFallingND()) { // Funcao que comparando a maxima altitude registrada e a altitude atual, retorna se a sonda ta caindo ou nao
             this->_exposureMode = false;
             this->_fallingMode = true;
             this->_myServo.CloseWindow();
-        //}
-    }
+        }
+
+        if(this->_gps.get_altitude() > 28000.0){
+            if(_hlsm303.getMod() < 2.0){
+                this->_exposureMode = false;
+                this->_fallingMode = true;
+                this->_myServo.CloseWindow();
+            }
+        }
+
+    }*/
 }
 
 void StateMach::FallingMode(){
+    //mandar o servo fechar a tampa
+
     this->_buzzer.beeper(3); // Pisca Buzzer 3 vezes pra sabermos que estamos no modo 3
     delay(5);
     this->_dht.readDHT();
@@ -99,6 +125,8 @@ void StateMach::FallingMode(){
     this->_gps.read_GPS();
     delay(5);
 
+
+
     /*if (hasLanded()) {
         this->_fallingMode = false;
         this->_rescueMode = true;
@@ -109,16 +137,41 @@ void StateMach::RescueMode(){
     this->_buzzer.beeper(5);
     delay(10000); // Valor ainda a ser pensado
 }
-/*
-void StateMach::READ_ALL(){
-    _dht.readDHT();
-    _uvx.readUVX();
-    _gps.read_GPS();
-    _hms5611.readAll();
-    _hds18b20.leTemperatura();
-    _hlsm303.readAc();
-}
 
+void StateMach::READ_ALL(){
+/*    if(!_dht())
+        _dht.readDHT();
+    delay(5);
+        
+
+    if(!_uvx())
+        _uvx.readUVX();
+    delay(5);
+    
+
+    if(!_gps())
+        _gps.read_GPS();
+    delay(5);
+
+    if(!_hms5611())
+        _hms5611.readAll();
+    delay(5);
+    
+
+    if(!_hds18b20())
+        _hds18b20.leTemperatura();
+    delay(5);
+    
+    if(!_hlsm303())
+        _hlsm303.readAc();
+    delay(5);*/
+}
+/*
+
+void StateMach::WRITE_ALL(){
+    
+}*/
+/*
 void StateMach::SERIAL_PRINT_ALL(){
     //DHT
     Serial.println(_dht.getTemp);

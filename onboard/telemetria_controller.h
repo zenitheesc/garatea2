@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <Wire.h>
 
 #define precisionn 1000000.0
 
@@ -14,5 +15,7 @@ class telemetria_controller {
         void saveData(double data);
         void cleanStringTel();
         char* getStringTel();
+        void transmission(char* s);
+
     
 };

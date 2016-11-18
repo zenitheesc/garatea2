@@ -4,7 +4,7 @@
 #define nro_de_medidas 6 //MARGEM DE SEGURAN�A
 
 
-class isFallingChecker {
+class isFalling {
 private:
 	double ultimas_medidasGPS[nro_de_medidas] = {0.0}; // VETOR QUE CONTÉM AS ULTIMAS ALTURAS DO GPS
 	double ultimas_medidasBAR[nro_de_medidas] = {0.0}; // VETOR QUE CONTEM AS ULTTIMAS ALTURAS DO BAROMETRO

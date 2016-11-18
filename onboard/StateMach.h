@@ -13,7 +13,8 @@
 #include "hComm.h"
 #include "telemetria_controller.h"
 #include "NumericDiff.h"
-#include "hSD.h"
+//#include "isFalling.h"
+//#include "hSD.h"
 
 
 // Pin Define
@@ -42,7 +43,8 @@ private:
   	SdFile myFile;*/
   	telemetria_controller TC;
   	NumericDiff ND;
-  	hSD _SD;
+  	//hSD _SD;
+  	//isFallingChecker IF;
 
 	// Flags de modos de operacao
 	bool _climbingMode = false;
@@ -53,7 +55,7 @@ private:
 public:
 	StateMach(): _dht(DHTPIN, DHTTYPE), _buzzer(BUZZPIN), 
 	_myServo(), _uvx(UVA_pin, UVB_pin, UVC_pin),
-	 _gps(), _hms5611() , _hds18b20(), _hlsm303(), _hcomm(), ND(1.0) {};
+	 _gps(), _hms5611() , _hds18b20(), _hlsm303(), _hcomm(), TC(), ND(1.0) {};
 
 	void ClimbingMode();
 	void ExposureMode();

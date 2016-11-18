@@ -49,12 +49,4 @@ float hGPS::get_speed(){
 float hGPS::get_altitude(){
 	return altitude;
 }
-uint8_t hGPS::get_hour(){
-	return hour;
-}
-uint8_t hGPS::get_minute(){
-	return minute;
-}
-uint8_t hGPS::get_second(){
-	return seconds;
-}
+

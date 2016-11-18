@@ -65,3 +65,8 @@ char* telemetria_controller::getStringTel(){
     return string_telemetria;
 }
 
+void telemetria_controller::transmission(char* s){
+    Wire.beginTransmission(7);
+    Wire.write(s);
+    Wire.endTransmission();
+}
