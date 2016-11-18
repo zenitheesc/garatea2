@@ -1,9 +1,8 @@
 #include "hSD.h"
 
 hSD::hSD(int pin){
-	if(SD.begin(pin))
-		Serial.println("SD inicializado.");
-	myFile = SD.open("gps.txt", FILE_WRITE);
+	if(SD.begin(pin, SPI_HALF_SPEED)) SD.initErrorHalt();		
+	myFile.open("test.txt", O_RDWR | O_CREAT | O_AT_END);
 }
 
 

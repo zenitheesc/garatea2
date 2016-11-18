@@ -340,26 +340,6 @@ void DallasTemperature::requestTemperatures()
 
 // sends command for one device to perform a temperature by address
 // returns FALSE if device is disconnected
-// returns TRUE  otherwise
-bool DallasTemperature::requestTemperaturesByAddress(uint8_t* deviceAddress)
-{
-
-  _wire->reset();
-  _wire->select(deviceAddress);
-  _wire->write(STARTCONVO, parasite);
-  
-    // check device
-  ScratchPad scratchPad;
-  if (!isConnected(deviceAddress, scratchPad)) return false;
-  
-  
-  // ASYNC mode?
-  if (!waitForConversion) return true;   
-  uint8_t bitResolution = getResolution(deviceAddress);
-  blockTillConversionComplete(&bitResolution, deviceAddress);
-  
-  return true;
-}
 
 
 void DallasTemperature::blockTillConversionComplete(uint8_t* bitResolution, uint8_t* deviceAddress)

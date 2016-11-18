@@ -1,11 +1,12 @@
 #ifndef hSD_h
 #define hSD_h
 
-#include "SD.h"
+#include <SdFat.h>
 
 class hSD {
 private:
-	File myFile;
+	SdFile myFile;
+	SdFat SD;
 public:
 	hSD(int pin);
 	void Write(String s);

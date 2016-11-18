@@ -19,7 +19,7 @@
 #define UVA_pin 4 // Valor a ser corrigido
 #define UVB_pin 5 // Valor a ser corrigido
 #define UVC_pin 6 // Valor a ser corrigido
-#define SD_PIN 1
+#define SD_PIN 4
 
 #define DHTTYPE DHT22
 

@@ -2,7 +2,7 @@
 #define hServo_h
 
 #include <Arduino.h>
-#include "Servo.h"
+#include <Servo.h>
 
 #define SERVOPIN 9 // Valor a ser corrigido
 #define SERVOMIN 0
