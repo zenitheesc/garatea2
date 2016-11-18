@@ -110,3 +110,45 @@ void StateMach::RescueMode(){
     this->_buzzer.beeper(5);
     delay(10000); // Valor ainda a ser pensado
 }
+
+void StateMach::READ_ALL(){
+    _dht.readDHT();
+    _uvx.readUVX();
+    _gps.read_GPS();
+    _hms5611.readAll();
+    _hds18b20.leTemperatura();
+    _hlsm303.readAc();
+}
+
+void StateMach::SERIAL_PRINT_ALL(){
+    //DHT
+    Serial.println(_dht.getTemp);
+    Serial.println(_dht.getHumd);
+    Serial.println(_dht.getHIdx);
+    //UVX
+    Serial.println(_uvx.get_UVA);
+    Serial.println(_uvx.get_UVB);
+    Serial.println(_uvx.get_UVC);
+    //GPS
+    Serial.println(_gps.get_latitude());
+    Serial.println(_gps.get_longitude());
+    Serial.println(_gps.get_timefix());
+    Serial.println(_gps.get_speed());
+    Serial.println(_gps.get_altitude());
+    Serial.println(_gps.get_hour());
+    Serial.println(_gps.get_minute());
+    Serial.println(_gps.get_second());
+    //hMS5611
+    Serial.println(_hms5611.getRawTemp());
+    Serial.println(_hms5611.getRawPressure());
+    Serial.println(_hms5611.getRealTemp());
+    Serial.println(_hms5611.getRealPress());
+    Serial.println(_hms5611.getAltitude());
+    //DS18B20
+    Serial.println(_hds18b20.getTemperatura());
+    //LSM303D
+    Serial.println(_hlsm303.getX());
+    Serial.println(_hlsm303.getY());
+    Serial.println(_hlsm303.getZ());
+    Serial.println(_hlsm303.getMod());
+}
