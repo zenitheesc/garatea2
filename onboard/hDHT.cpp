@@ -4,7 +4,7 @@
 
 
 void hDHT::readDHT(void)
-{	Serial.println("lendo dht");
+{	Serial.println(F("lendo dht"));
 	this->read();
 	Temp = this->readTemperature();
 	Humd = this->readHumidity();

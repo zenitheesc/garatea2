@@ -23,7 +23,7 @@ void StateMach::Main_State(){
 }
 
 void StateMach::ClimbingMode(){
-    Serial.println("Estou no ClimbingMode");    
+    Serial.println(F("Estou no ClimbingMode"));    
 	_buzzer.beep(); // Pisca Buzzer 1 vez pra sabermos que estamos no modo 1 
     delay(5);
     _dht.readDHT();

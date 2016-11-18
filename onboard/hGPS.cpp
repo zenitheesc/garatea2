@@ -8,31 +8,31 @@ void hGPS::read_GPS(){
 }
 
 void hGPS::hparse(){
-	Serial.print("\nTime: ");
+	Serial.print(F("\nTime: "));
     Serial.print(hour, DEC); Serial.print(':');
     Serial.print(minute, DEC); Serial.print(':');
     Serial.print(seconds, DEC); Serial.print('.');
     Serial.println(milliseconds);
-    Serial.print("Date: ");
+    Serial.print(F("Date: "));
     Serial.print(day, DEC); Serial.print('/');
-    Serial.print(month, DEC); Serial.print("/20");
+    Serial.print(month, DEC); Serial.print(F("/20"));
     Serial.println(year, DEC);
-    Serial.print("Fix: "); Serial.print((int)fix);
-    Serial.print(" quality: "); Serial.println((int)fixquality); 
+    Serial.print(F("Fix: ")); Serial.print((int)fix);
+    Serial.print(F(" quality: ")); Serial.println((int)fixquality); 
     if (fix) {
-      Serial.print("Location: ");
+      Serial.print(F("Location: "));
       Serial.print(latitude, 4); Serial.print(lat);
-      Serial.print(", "); 
+      Serial.print(F(", ")); 
       Serial.print(longitude, 4); Serial.println(lon);
-      Serial.print("Location (in degrees, works with Google Maps): ");
+      Serial.print(F("Location (in degrees, works with Google Maps): "));
       Serial.print(latitudeDegrees, 4);
-      Serial.print(", "); 
+      Serial.print(F(", ")); 
       Serial.println(longitudeDegrees, 4);
       
-      Serial.print("Speed (knots): "); Serial.println(speed);
-      Serial.print("Angle: "); Serial.println(angle);
-      Serial.print("Altitude: "); Serial.println(altitude);
-      Serial.print("Satellites: "); Serial.println((int)satellites);
+      Serial.print(F("Speed (knots): ")); Serial.println(speed);
+      Serial.print(F("Angle: ")); Serial.println(angle);
+      Serial.print(F("Altitude: ")); Serial.println(altitude);
+      Serial.print(F("Satellites: ")); Serial.println((int)satellites);
     }
 }
 

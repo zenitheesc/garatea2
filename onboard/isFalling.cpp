@@ -124,11 +124,11 @@ void guardar_coefGPS(double cf){
 
     //IMPRIMIR ULTIMOS COEFICIENTES ANGULARES
     //printf("medida armazenada. [alt = %.2f]", ultimos_coefGPS[ult_auxGPS]);
-    printf("ULTIMOS 10 COEFICIENTES: [ ");
-    for(int m = 0; m < nro_de_medidas; m++){
+    //printf("ULTIMOS 10 COEFICIENTES: [ ");
+    /*for(int m = 0; m < nro_de_medidas; m++){
         printf("%.1f ", ultimos_coefGPS[m]);
-    }
-    printf("]\n");
+    }*/
+    //printf("]\n");
     return;
 }
 
@@ -194,12 +194,12 @@ int main (){
         double c;
 
     while(faltitude != -1){
-        printf("%d medida: ", cnt);
+        //printf("%d medida: ", cnt);
         cnt++;
 
         scanf("%f", &faltitude);
         guardar_medidaGPS();
-        printf("\n");
+        //printf("\n");
 
         c = coef_angularGPS();
         //printf("coef angular: %.20f\n", c);
@@ -207,9 +207,9 @@ int main (){
 
         if(cnt > nro_de_medidas){
             if(isFallingGPS() == true){
-                printf("esta CAINDO!\n");
-                if(hasLanded(faltitude) == true) printf("resgate!\n");
-            } else  printf("esta SUBINDO!\n");
+                //printf("esta CAINDO!\n");
+                //if(hasLanded(faltitude) == true) printf("resgate!\n");
+            } 
 
         }
 

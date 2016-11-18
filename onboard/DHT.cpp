@@ -28,7 +28,7 @@ void DHT::begin(void) {
   // >= MIN_INTERVAL right away. Note that this assignment wraps around,
   // but so will the subtraction.
   _lastreadtime = -MIN_INTERVAL;
-  DEBUG_PRINT("Max clock cycles: "); DEBUG_PRINTLN(_maxcycles, DEC);
+  DEBUG_PRINT(F("Max clock cycles: ")); DEBUG_PRINTLN(_maxcycles, DEC);
 }
 
 //boolean S == Scale.  True == Fahrenheit; False == Celcius

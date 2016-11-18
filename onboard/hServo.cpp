@@ -9,7 +9,7 @@ void hServo::OpenWindow(){
 }
 
 void hServo::CloseWindow(){
-	Serial.println("estou na closeWindow");
+	Serial.println(F("estou na closeWindow"));
 	if(!attached){		
 		setup(SERVOPIN);
 	}

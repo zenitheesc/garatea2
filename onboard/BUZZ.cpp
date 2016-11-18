@@ -18,7 +18,7 @@ BUZZ::~BUZZ(){
 }
 
 void BUZZ::beeper(int n){
-    Serial.println("Estou no beeper");
+    Serial.println(F("Estou no beeper"));
 	for (int i = 0; i <= n; i++) {
         digitalWrite(this->buzzPin, HIGH);
         delay(0.5);
@@ -43,7 +43,7 @@ void BUZZ::beep(){
     digitalWrite(buzzPin, HIGH);
     delay(400);
     digitalWrite(buzzPin, LOW); // Finish beep with low state.
-    Serial.println("Estou no beep");
+    Serial.println(F("Estou no beep"));
 }
 
 int BUZZ::getBuzzPin(){
