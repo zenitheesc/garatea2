@@ -12,6 +12,7 @@ public:
 	void addData(double y);
 	void computeDiff();
 	double getAngularCoef();
+	bool isFallingND();
 };
 
 

@@ -1,22 +1,3 @@
-#include <ArduinoStream.h>
-#include <bufstream.h>
-#include <ios.h>
-#include <iostream.h>
-#include <istream.h>
-#include <MinimumSerial.h>
-#include <ostream.h>
-#include <Sd2Card.h>
-#include <SdBaseFile.h>
-#include <SdFat.h>
-#include <SdFatConfig.h>
-#include <SdFatmainpage.h>
-#include <SdFatStructs.h>
-#include <SdFatUtil.h>
-#include <SdFile.h>
-#include <SdInfo.h>
-#include <SdStream.h>
-#include <SdVolume.h>
-
 #ifndef StateMach_h
 #define StateMach_h
 
@@ -32,6 +13,7 @@
 #include "hComm.h"
 #include "telemetria_controller.h"
 #include "NumericDiff.h"
+#include "hSD.h"
 
 
 // Pin Define
@@ -56,10 +38,11 @@ private:
 	hDS18B20 _hds18b20;
 	hLSM303 _hlsm303;
 	hComm _hcomm;
- 	SdFat sd;
-  	SdFile myFile;
+ 	/*SdFat sd;
+  	SdFile myFile;*/
   	telemetria_controller TC;
   	NumericDiff ND;
+  	hSD _SD;
 
 	// Flags de modos de operacao
 	bool _climbingMode = false;

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define precision 1000000.0
+#define precisionn 1000000.0
 
 class telemetria_controller {
     private:
@@ -14,5 +14,5 @@ class telemetria_controller {
         void saveData(double data);
         void cleanStringTel();
         char* getStringTel();
-
+    
 };

@@ -15,20 +15,20 @@ void telemetria_controller::number_to_string(char* s, double n){
 	parte_inteira = (int) n;
 	n = n - parte_inteira;
 
-	parte_decimal = (n * precision);
+	parte_decimal = (n * precisionn);
 
 	int int_dec = (int) parte_decimal;
 
 	int cnt = 0;
-	if(int_dec < precision){
+	if(int_dec < precisionn){
         int aux = int_dec;
-        while (aux < precision){
+        while (aux < precisionn){
             aux = aux * 10;
             cnt++;
         }
 	}
 
-    sprintf (s, "%d", parte_inteira);
+    sprintf (s, "%d", precisionn);
 
 	if(parte_decimal != 0){
 	    strcat (s, ".");

@@ -23,3 +23,13 @@ double NumericDiff::getAngularCoef(){
 	return D;
 }
 
+bool NumericDiff::isFallingND(){
+	if(getAngularCoef() > 0){
+		return false;
+	}
+	if(getAngularCoef() < 0){
+		return true;
+	}
+}
+
+

@@ -188,34 +188,3 @@ bool hasLanded(double hGPS/*, double hBAR*/){
         return false;
 }
 
-
-int main (){
-        int cnt = 1;
-        double c;
-
-    while(faltitude != -1){
-        //printf("%d medida: ", cnt);
-        cnt++;
-
-        scanf("%f", &faltitude);
-        guardar_medidaGPS();
-        //printf("\n");
-
-        c = coef_angularGPS();
-        //printf("coef angular: %.20f\n", c);
-        guardar_coefGPS(c);
-
-        if(cnt > nro_de_medidas){
-            if(isFallingGPS() == true){
-                //printf("esta CAINDO!\n");
-                //if(hasLanded(faltitude) == true) printf("resgate!\n");
-            } 
-
-        }
-
-
-
-    }
-
-    return 0;
-}
