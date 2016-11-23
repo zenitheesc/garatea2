@@ -6,12 +6,13 @@ telemetria_controller::telemetria_controller(){
 
 void telemetria_controller::computeData(char* s, char* newData){
     strcat (s, newData);
-    strcat (s, "; ");
+    strcat (s, ";");
 }
 
 void telemetria_controller::number_to_string(char* s, double n){
 	int parte_inteira;
 	double parte_decimal;
+    strcpy(s, "");
 	parte_inteira = (int) n;
 	n = n - parte_inteira;
 
@@ -28,7 +29,7 @@ void telemetria_controller::number_to_string(char* s, double n){
         }
 	}
 
-    sprintf (s, "%d", precisionn);
+    sprintf (s, "%d", parte_decimal);
 
 	if(parte_decimal != 0){
 	    strcat (s, ".");
@@ -58,7 +59,7 @@ void telemetria_controller::saveData(double data){
 }
 
 void telemetria_controller::cleanStringTel(){
-    strcpy(string_telemetria, "");
+    strcpy(string_telemetria, "$$zenith");
 }
 
 char* telemetria_controller::getStringTel(){

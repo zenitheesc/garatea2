@@ -1,21 +1,10 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
+#include "isFalling.h"
 #define nro_de_medidas 6 //MARGEM DE SEGURANÇA
-
-double ultimas_medidasGPS[nro_de_medidas] = {0.0}; // VETOR QUE CONTÉM AS ULTIMAS ALTURAS DO GPS
-double ultimas_medidasBAR[nro_de_medidas] = {0.0}; // VETOR QUE CONTEM AS ULTTIMAS ALTURAS DO BAROMETRO
-double ultimos_coefGPS[nro_de_medidas] = {0.0};    // VETOR QUE CONTÉM OS ÚLTIMOS COEF. ANGULARES DO GPS
-double ultimos_coefBAR[nro_de_medidas] = {0.0};    // VETOR QUE CONTÉM OS ÚLTIMOS COEF. ANGULARES DO BAROMETRO
-
-int ult_auxGPS = -1; //NECESSÁRIO PARA O FUNCIONAMENTO CORRETO DA FUNÇAO GUARDAR MEDIDA
-int ult_auxBAR = -1;
-float faltitude;
 
 //  COEF_ANGULAR CALCULA O COEFICIENTE ANGULAR
 //  PARA A MELHOR RETA QUE DESCREVE O COMPORTAMENTO
 //  DAS ÚLTIMAS ALTURAS (MARGEM DE SEGURANÇA)
-double coef_angularGPS(){
+double isFalling::coef_angularGPS(){
     if(ult_auxGPS < nro_de_medidas-1) return 0;
 
     double media_atual = 0;
@@ -42,7 +31,7 @@ double coef_angularGPS(){
     return coef;
 }
 
-double coef_angularBAR(){
+double isFalling::coef_angularBAR(){
     if(ult_auxBAR < nro_de_medidas-1) return 0;
 
     double media_atual = 0;
@@ -72,7 +61,7 @@ double coef_angularBAR(){
 //  GUARDAR_MEDIDA INSERE NO VETOR DAS ULTIMAS MEDIDAS
 //  A ULTIMA MEDIDA RECEBIDA
 
-void guardar_medidaGPS(){
+void isFalling::guardar_medidaGPS(float f){
     if(ult_auxGPS == nro_de_medidas-1){
         for(int m = 0; m < nro_de_medidas-1; m++)
             ultimas_medidasGPS[m] = ultimas_medidasGPS[m+1];
@@ -80,7 +69,8 @@ void guardar_medidaGPS(){
     else
         ult_auxGPS++;
 
-    ultimas_medidasGPS[ult_auxGPS] = faltitude;
+    ultimas_medidasGPS[ult_auxGPS] = f;
+    guardar_coefGPS(coef_angularGPS());
 
     //IMPRIMIR VETOR DE ALTURAS
     //printf("medida armazenada. [alt = %.2f]\n", ultimas_medidasGPS[ult_auxGPS]);
@@ -92,7 +82,7 @@ void guardar_medidaGPS(){
     return;
 }
 
-void guardar_medidaBAR(){
+void isFalling::guardar_medidaBAR(float f){
     if(ult_auxBAR == nro_de_medidas-1){
         for(int m = 0; m < nro_de_medidas-1; m++)
             ultimas_medidasBAR[m] = ultimas_medidasBAR[m+1];
@@ -100,7 +90,8 @@ void guardar_medidaBAR(){
     else
         ult_auxBAR++;
 
-    ultimas_medidasBAR[ult_auxBAR] = faltitude;
+    ultimas_medidasBAR[ult_auxBAR] = f;
+    guardar_coefBAR(coef_angularBAR());
 
     //IMPRIMIR VETOR DE ALTURAS
     //printf("medida armazenada. [alt = %.2f]\n", ultimas_medidasBAR[ult_auxBAR]);
@@ -114,7 +105,7 @@ void guardar_medidaBAR(){
 
 //  GUARDAR_COEF GUARDA, NO VETOR DE COEF. ANGULARES
 //  O ULTIMO COEFICIENTE ANGULAR CALCULADO
-void guardar_coefGPS(double cf){
+void isFalling::guardar_coefGPS(double cf){
     if(ult_auxGPS == nro_de_medidas-1){
         for(int m = 0; m < nro_de_medidas-1; m++)
             ultimos_coefGPS[m] = ultimos_coefGPS[m+1];
@@ -132,7 +123,7 @@ void guardar_coefGPS(double cf){
     return;
 }
 
-void guardar_coefBAR(double cf){
+void isFalling::guardar_coefBAR(double cf){
     if(ult_auxBAR == nro_de_medidas-1){
         for(int m = 0; m < nro_de_medidas-1; m++)
             ultimos_coefBAR[m] = ultimos_coefBAR[m+1];
@@ -152,7 +143,7 @@ void guardar_coefBAR(double cf){
 
 // ISFALLING, BASEADA NO COMPORTAMENTO DOS ULTIMOS
 // COEF ANGULARES, DETERMINA SE A SONDA ESTA CAINDO
-bool isFallingGPS(){
+bool isFalling::isFallingGPS(){
     int counter = 0;
     for(int i = 0; i < nro_de_medidas; i++){
         if(ultimos_coefGPS[i] >= 0)
@@ -165,7 +156,7 @@ bool isFallingGPS(){
         return true;
 }
 
-bool isFallingBAR(){
+bool isFalling::isFallingBAR(){
     int counter = 0;
     for(int i = 0; i < nro_de_medidas; i++){
         if(ultimos_coefBAR[i] >= 0)
@@ -178,13 +169,4 @@ bool isFallingBAR(){
         return true;
 }
 
-
-// HASLANDED, BASEADO NA ALTURA, VERIFICA SE A SONDA
-// ESTÁ PRESTES A CAIR OU JÁ CAIU
-bool hasLanded(double hGPS/*, double hBAR*/){
-    if(hGPS < 2500.0/* || hBAR < 2500.0*/)
-        return true;
-    else
-        return false;
-}
 

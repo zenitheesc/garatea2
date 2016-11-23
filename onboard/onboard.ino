@@ -1,6 +1,5 @@
 //#include <avr/wdt.h> // Biblioteca utilizada pelo watchdog timer.
 #include "StateMach.h"
-#include "isFalling.h"
 
 StateMach estados;
 

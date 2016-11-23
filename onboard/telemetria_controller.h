@@ -3,19 +3,16 @@
 #include <string.h>
 #include <Wire.h>
 
-#define precisionn 1000000.0
+#define precisionn 100.0
 
 class telemetria_controller {
-    private:
+    public:
         char string_telemetria[64];
         void computeData(char* s, char* newData);
         void number_to_string(char* s, double n);
-    public:
         telemetria_controller();
         void saveData(double data);
         void cleanStringTel();
         char* getStringTel();
         void transmission(char* s);
-
-    
 };

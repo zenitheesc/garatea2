@@ -13,7 +13,8 @@
 #include "hComm.h"
 #include "telemetria_controller.h"
 #include "NumericDiff.h"
-//#include "isFalling.h"
+#include "isFalling.h"
+#include "Wire.h"
 //#include "hSD.h"
 
 
@@ -27,7 +28,7 @@
 
 #define DHTTYPE DHT22
 
-class StateMach{
+class StateMach {
 private:
 	// Create Objects
 	hDHT _dht;
@@ -39,13 +40,15 @@ private:
 	hDS18B20 _hds18b20;
 	hLSM303 _hlsm303;
 	hComm _hcomm;
- 	/*SdFat sd;
-  	SdFile myFile;*/
   	telemetria_controller TC;
   	NumericDiff ND;
-  	//hSD _SD;
-  	//isFallingChecker IF;
-
+  	isFalling IsF;
+  	char SD1[32];
+  	char SD2[32];
+  	char SD3[32];
+  	char SD4[32];
+  	char SD5[32];
+  	char SDaux[12];
 	// Flags de modos de operacao
 	bool _climbingMode = false;
 	bool _exposureMode = false;
@@ -54,8 +57,8 @@ private:
 
 public:
 	StateMach(): _dht(DHTPIN, DHTTYPE), _buzzer(BUZZPIN), 
-	_myServo(), _uvx(UVA_pin, UVB_pin, UVC_pin),
-	 _gps(), _hms5611() , _hds18b20(), _hlsm303(), _hcomm(), TC(), ND(1.0) {};
+	_myServo(), _uvx(),	 _gps(), _hms5611() , _hds18b20(),
+	 _hlsm303(), _hcomm(), TC(), ND(1.0), IsF() {};
 
 	void ClimbingMode();
 	void ExposureMode();
@@ -64,6 +67,8 @@ public:
 	void Main_State();
   	void READ_ALL();
   	void SERIAL_PRINT_ALL();
+  	void SAVE_ALL();
+  	void TELEMETRIA();
 };
 
 #endif

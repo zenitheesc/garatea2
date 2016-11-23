@@ -1,40 +1,36 @@
 #include "UVX.h"
 
-UVX::UVX(int uva, int uvb, int uvc){
-	this->UVA_pin = uva;
-	this->UVB_pin = uvb;
-	this->UVC_pin = uvc;
-	this->UVA = 0;
-	this->UVB = 0;
-	this->UVC = 0;
+UVX::UVX(){
+	strcpy(UVA, "");
+    strcpy(UVB, "");
+    strcpy(UVC, "");
 }
 
-float UVX::get_UVA(){
-	return this->UVA;
+char* UVX::get_UVA(){
+	return UVA;
 }
-float UVX::get_UVB(){
-	return this->UVB;
+char* UVX::get_UVB(){
+	return UVB;
 }
-float UVX::get_UVC(){
-	return this->UVC;
+char* UVX::get_UVC(){
+	return UVC;
 }
 
 void UVX::readUVX(void){
-	float UVAtemp = 0;
-    float UVBtemp = 0;
-    float UVCtemp = 0;
+	Wire.requestFrom(1, 21);
+    delay(500);
 
-    this->UVA_in = analogRead(UVA_pin);
-    this->UVB_in = analogRead(UVB_pin);
-    this->UVC_in = analogRead(UVC_pin);
+    char datastring[22];
+    int aux = 0;
 
-    // Fazer um loop com algumas medidas e fazer uma media
-    for (int a = 0; a < 10; a++) {
-        UVAtemp += 3.3*UVA_in/(0.06*this->GainA); // Leitura em W
-        UVBtemp += 3.3*UVB_in/(0.12*this->GainB);
-        UVCtemp += 3.3*UVC_in/(0.18*this->GainC);
+    while(Wire.available()){
+        datastring[aux] = Wire.read();
+        aux = aux + 1;
     }
-    UVA = UVAtemp/10;
-    UVB = UVBtemp/10;
-    UVC = UVCtemp/10;
+
+    for(int i = 0; i < 7; i++){
+        UVA[i] = datastring[i];
+        UVB[i] = datastring[i+6];
+        UVC[i] = datastring[i+13];
+    }
 }

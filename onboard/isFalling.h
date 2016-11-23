@@ -14,13 +14,18 @@ private:
 	int ult_auxBAR = -1;
 	float faltitude;
 public:
+	isFalling() {};
 	double coef_angularGPS();
 	double coef_angularBAR();
-	void guardar_medidaGPS();
-	void guardar_medidaBAR();
+
+	void guardar_medidaGPS(float f);
+	void guardar_medidaBAR(float f);
+
 	void guardar_coefGPS(double cf);
 	void guardar_coefBAR(double cf);
+
 	bool isFallingGPS();
 	bool isFallingBAR();
+
 	bool hasLanded(double hGPS);
 };
