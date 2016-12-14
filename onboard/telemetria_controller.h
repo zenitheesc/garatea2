@@ -6,6 +6,8 @@
 #define precisionn 100.0
 
 class telemetria_controller {
+	private:
+		char d[10];
     public:
         char string_telemetria[64];
         void computeData(char* s, char* newData);

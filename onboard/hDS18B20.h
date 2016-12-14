@@ -1,7 +1,7 @@
 #include "DallasTemperature.h"
 #include "OneWire.h"
 
-#define hDS18B20_PIN 2
+#define hDS18B20_PIN 8
 
 class hDS18B20 : public DallasTemperature {
 private:

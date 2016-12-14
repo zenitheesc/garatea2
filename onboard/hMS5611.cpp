@@ -19,11 +19,17 @@ void hMS5611::computeAltitude(){
 	Altitude = this->setAltitude(this->getRealPress(), 101325.0);
 }
 void hMS5611::readAll(){
-	this->readRawTemp();
-	this->readRawPressuro();
-	this->readRealTemp();
-	this->readRealPress();
-	this->computeAltitude();
+	//Serial.println("leitura ms5611");
+	readRawTemp();
+	//Serial.println("raw temp ok");
+	readRawPressuro();
+	//Serial.println("raw press ok");
+	readRealTemp();
+	//Serial.println("real temp ok");
+	readRealPress();
+	//Serial.println("real press ok");
+	computeAltitude();
+	//Serial.println("alt ok");
 }
 uint32_t hMS5611::getRawTemp(){
 	return RawTemp;

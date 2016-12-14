@@ -22,10 +22,16 @@ void UVX::readUVX(void){
 
     char datastring[22];
     int aux = 0;
+    int ti = millis();
+    int tf = millis();
+    int dt = 0;
 
-    while(Wire.available()){
+    while(Wire.available() && dt < 1000){
         datastring[aux] = Wire.read();
         aux = aux + 1;
+        tf = millis();
+        dt = tf - ti;
+        Serial.println(dt);
     }
 
     for(int i = 0; i < 7; i++){

@@ -1,6 +1,6 @@
 #ifndef LSM303_h
 #define LSM303_h
-#include "Wire.h"
+#include <Wire.h>
 #include <math.h>
 #include <Arduino.h> // for byte data type
 

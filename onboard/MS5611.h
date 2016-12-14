@@ -27,7 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "WProgram.h"
 #endif
 
-#include "Wire.h"
+#include <Wire.h>
 #include <math.h>
 
 #define MS5611_ADDRESS                (0x77)

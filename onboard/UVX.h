@@ -4,7 +4,6 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-
 class UVX{
 private:
 	char UVA[7], UVB[7], UVC[7];

@@ -27,7 +27,7 @@ public:
     void beeper(int n); //
     int getBuzzPin();
 private:
-    int buzzPin = 0; // Information for some function who needs this
+    int buzzPin = 4; // Information for some function who needs this
 };
 
 

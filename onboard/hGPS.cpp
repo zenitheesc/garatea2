@@ -50,3 +50,6 @@ float hGPS::get_altitude(){
 	return altitude;
 }
 
+float hGPS::get_fix(){
+  return fix;
+}

@@ -12,7 +12,10 @@ void hLSM303::start(){
 }
 
 void hLSM303::readAc(){
-
+	X_ac = 0;
+  	Y_ac = 0;
+  	Z_ac = 0;
+  	Mod = 0;
 
  	for(int i = 0; i < R; i++){
  		this->read();

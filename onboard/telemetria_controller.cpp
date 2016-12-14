@@ -10,49 +10,16 @@ void telemetria_controller::computeData(char* s, char* newData){
 }
 
 void telemetria_controller::number_to_string(char* s, double n){
-	int parte_inteira;
-	double parte_decimal;
+	n = n * 100;
+    int resultado = (int) n;
+
     strcpy(s, "");
-	parte_inteira = (int) n;
-	n = n - parte_inteira;
 
-	parte_decimal = (n * precisionn);
-
-	int int_dec = (int) parte_decimal;
-
-	int cnt = 0;
-	if(int_dec < precisionn){
-        int aux = int_dec;
-        while (aux < precisionn){
-            aux = aux * 10;
-            cnt++;
-        }
-	}
-
-    sprintf (s, "%d", parte_decimal);
-
-	if(parte_decimal != 0){
-	    strcat (s, ".");
-        while(cnt > 1){
-            strcat (s, "0");
-            cnt--;
-        }
-
-        while( (int_dec%10) == 0){
-            int_dec = int_dec/10;
-        }
-
-
-        char dec[10];
-        sprintf (dec, "%d", int_dec);
-        strcat(s, dec);
-        free(dec);
-	}
-
+    sprintf(s, "%d", resultado);
 }
 
 void telemetria_controller::saveData(double data){
-    char d[10];
+    strcpy(d, "\0");
     number_to_string(d, data);
     computeData(string_telemetria, d);
     free(d);
@@ -67,7 +34,7 @@ char* telemetria_controller::getStringTel(){
 }
 
 void telemetria_controller::transmission(char* s){
-    Wire.beginTransmission(7);
+    Wire.beginTransmission(25);
     Wire.write(s);
     Wire.endTransmission();
 }

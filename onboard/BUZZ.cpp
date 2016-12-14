@@ -9,8 +9,8 @@
 #include "BUZZ.h"
 
 BUZZ::BUZZ(int buzzPin){
-    pinMode(buzzPin, OUTPUT);
     this->buzzPin = buzzPin;
+    pinMode(buzzPin, LOW);
 }
 
 BUZZ::~BUZZ(){
@@ -24,15 +24,12 @@ void BUZZ::beeper(int n){
         delay(0.5);
         digitalWrite(this->buzzPin, LOW);
         delay(0.5);
-        
     }
 }
 
 void BUZZ::beep(){
-    
-    buzzPin = 2;
+    buzzPin = 4;
     digitalWrite(buzzPin, HIGH);
-
     delay(200);
     digitalWrite(buzzPin, LOW);
     delay(200);

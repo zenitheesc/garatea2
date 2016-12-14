@@ -20,6 +20,7 @@ public:
 	float get_longitude();
 	float get_speed();
 	float get_altitude();
+	float get_fix();
 };
 
 #endif
