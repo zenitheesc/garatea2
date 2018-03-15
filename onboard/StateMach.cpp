@@ -1,11 +1,16 @@
 #include "StateMach.h"
 
 void StateMach::Main_State(){
-    Serial.println(F("Estou no Main state.")); 
+
+    Serial.println(F("I'm in Main state.")); 
+
+    // Start all sensors
     START_ALL();
+
+    // Counter to send to telemetry
     contador = 0;
 
-    // Loop de execucao dos modos
+    // Mode execution loop
    while(true) {
         if(this->_climbingMode) ClimbingMode();
        /* if(this->_exposureMode) ExposureMode();
@@ -16,19 +21,21 @@ void StateMach::Main_State(){
 }
 
 void StateMach::ClimbingMode(){
-    Serial.println("Estou no ClimbingMode");    
+
+    Serial.println("I'm in ClimbingMode");    
 	//_buzzer.beep(); // Pisca Buzzer 1 vez pra sabermos que estamos no modo 1 
     Serial.println(contador);
     READ_ALL();
-    Serial.println(F("Leu todos os sensores."));
+    Serial.println(F("All sensors read."));
     Serial.println(contador);
     SERIAL_PRINT_ALL();
-    Serial.println(F("Imprimiu todos os sensores."));
+    Serial.println(F("All sensors printed."));
     Serial.println(contador);
     SAVE_ALL();
-    Serial.println(F("Enviou todos por i2c para o SD."));
+    Serial.println(F("All data sent to SD card."));
     Serial.println(contador);
-    //CONDIÇÃO DA TELEMETRIA:
+
+    // Telemetry condition
     if( contador > 9 ){
         TELEMETRIA();
         Serial.println(F("Enviou a string para a telemetria por i2c."));
@@ -38,81 +45,84 @@ void StateMach::ClimbingMode(){
         Serial.println(F("Sem tempo para telemetria."));
     }
     Serial.println(contador);
-    /*if (this->_gps.get_altitude() > 20000.0 || _hms5611.getAltitude() > 20000.0) {
-        this->_climbingMode = false;        
-        this->_exposureMode = true;
-        this->_myServo.OpenWindow();
-    }*/
-}
-/*
-void StateMach::ExposureMode(){
-    //_buzzer.beeper(2); // Pisca Buzzer 2 vezes pra sabermos que estamos no modo 2
 
-    ///VERIFICAR SE CADA SENSOR ESTÁ DISPONIVEL ANTES DE REALIZAR A LEITURA
+    // State machine check (to exposure mode)
+    if (this->_gps1.get_altitude() > ExposureModeAltitude || this->_gps2.get_altitude() > ExposureModeAltitude/* BMP180 TBM */) {
+        // Opens exp window
+        this->_myServo.OpenWindow();
+
+        this->_climbingMode = false;        
+        this->_exposureMode = true;        
+    }
+}
+
+void StateMach::ExposureMode(){
+
+    // Exposure mode beep
+    _buzzer.beeper(2);
+
+    // Needs to check if sensors are available
     READ_ALL();
     SERIAL_PRINT_ALL();
     SAVE_ALL();
     TELEMETRIA();
 
-    //ATUALIZAR OS DADOS DOS VERIFICADORES DE COEF ANGULAR
-    IsF.guardar_medidaGPS(_gps.get_altitude());
-    IsF.guardar_medidaBAR(_hms5611.getAltitude());
-    ND.addData(_gps.get_altitude());
+    // Update angular coef data
+    IsF.guardar_medidaGPS(_gps1.get_altitude());
+    IsF.guardar_medidaGPS(_gps2.get_altitude());
 
-    //DETECTOU QUEDA -> MOMENTO EM QUE A TAMPA FECHA    
-    if (this->_gps.get_altitude() > 25000.0 || _hms5611.getAltitude() > 25000.0) {
+    ND.addData(_gps1.get_altitude());
+    ND.addData(_gps2.get_altitude());
+
+    // Check if probe is falling
+    if (this->_gps1.get_altitude() > CloseWindowAltitude || this->_gps2.get_altitude() > CloseWindowAltitude/* BMP180 TBM */) {
         if( IsF.isFallingBAR() || IsF.isFallingGPS() || ND.isFallingND() ) { 
-        // Funcao que comparando a maxima altitude registrada e a altitude atual, retorna se a sonda ta caindo ou nao
+            // Close exp window
             this->_myServo.CloseWindow();
+
             this->_exposureMode = false;
             this->_fallingMode = true;            
         }
 
+        /* We no longer use an acelerometer (_hlsm303)
         if(this->_gps.get_altitude() > 28000.0){
             if(_hlsm303.getMod() < 2.0){
                 this->_myServo.CloseWindow();
                 this->_exposureMode = false;
                 this->_fallingMode = true;                
             }
-        }
+        }*/
     }
 
-    if(millis() == 2*60*60*1000){
+    if(millis() == MaxTimeCloseWindow){
         this->_myServo.CloseWindow();
     }
 }
 
 void StateMach::FallingMode(){
+
     READ_ALL();
     SERIAL_PRINT_ALL();
     SAVE_ALL();
     TELEMETRIA();
 
-    if (_gps.get_altitude() < 2000.0) {
+    if (_gps1.get_altitude() < RescueModeAltitude || _gps2.get_altitude() < RescueModeAltitude) {
         this->_fallingMode = false;
         this->_rescueMode = true;
     }
 }
 
 void StateMach::RescueMode(){
-    //this->_buzzer.beeper(5);
-    delay(10000); // Valor ainda a ser pensado
-}*/
+    this->_buzzer.beeper(5);
+    delay(10000);
+}
 
 void StateMach::START_ALL(){
     Serial.println("Inicializando sesores.");
     
-    _hms5611.startBar();
-    Serial.println(F("5611 ok"));
-  
-    _hds18b20.start();
-    Serial.println(F("ds18b20 ok"));
 
-    _hlsm303.start();
-    Serial.println(F("ac ok"));
-
-    _gps.begin(9600);
-    Serial.println(F("gps ok"));
+    /*_gps.begin(9600);
+    Serial.println(F("gps ok"));*/
 
     _myServo.setup(5);
     Serial.println(F("servo ok"));
@@ -127,29 +137,20 @@ void StateMach::START_ALL(){
 }
 
 void StateMach::READ_ALL(){
+
     _dht.readDHT();
     Serial.println(F("ok"));
     delay(5);
-
-    //_uvx.readUVX();
-    //delay(5);
     
     /*_gps.read_GPS();
     Serial.println(F("ok"));
     delay(5);*/
 
-    _hms5611.readAll();
-    Serial.println(F("ok"));
-    delay(5);
+    // Needs 2 gps
+
+    // Needs EEPROM
     
-
-    _hds18b20.leTemperatura();
-    Serial.println(F("ok"));
-    delay(5);
-
-    _hlsm303.readAc();
-    Serial.println(F("ok"));
-    delay(5);
+    // Needs BMP180
 }
 
 
@@ -159,21 +160,6 @@ void StateMach::SERIAL_PRINT_ALL(){
     Serial.println(_dht.getHumd());
     Serial.println(_dht.getHIdx());
 
-    //hMS5611
-    Serial.println(_hms5611.getRawTemp());
-    Serial.println(_hms5611.getRawPressure());
-    Serial.println(_hms5611.getRealTemp());
-    Serial.println(_hms5611.getRealPress());
-    Serial.println(_hms5611.getAltitude());
-
-    //DS18B20
-    Serial.println(_hds18b20.getTemperatura());
-
-    //LSM303D
-    Serial.println(_hlsm303.getX());
-    Serial.println(_hlsm303.getY());
-    Serial.println(_hlsm303.getZ());
-    Serial.println(_hlsm303.getMod());
 
     //GPS
    /* Serial.println(_gps.get_fix());
@@ -181,15 +167,6 @@ void StateMach::SERIAL_PRINT_ALL(){
     Serial.println(_gps.get_longitude());
     Serial.println(_gps.get_speed());
     Serial.println(_gps.get_altitude());*/
-
-
-/*
-
-    //UVX
-    Serial.println(_uvx.get_UVA());
-    Serial.println(_uvx.get_UVB());
-    Serial.println(_uvx.get_UVC());
-    */
     
     
 }
@@ -198,31 +175,6 @@ void StateMach::SAVE_ALL() {
     strcat(SD1, "");
     strcat(SDaux, "");
     
-     //DS18B20
-    TC.number_to_string(SDaux, _hds18b20.getTemperatura());
-    TC.computeData(SD1, SDaux); //4
-    strcpy(SDaux, "");
-
-    //LSM303D
-    TC.number_to_string(SDaux, _hlsm303.getX());
-    TC.computeData(SD1, SDaux); //4
-    strcpy(SDaux, "");
-    TC.number_to_string(SDaux, _hlsm303.getY());
-    TC.computeData(SD1, SDaux); //4
-    strcpy(SDaux, "");
-    TC.number_to_string(SDaux, _hlsm303.getZ());
-    TC.computeData(SD1, SDaux); //4
-    strcpy(SDaux, "");
-    TC.number_to_string(SDaux, _hlsm303.getMod());
-    TC.computeData(SD1, SDaux); //4
-    strcpy(SDaux, "");
-
-    Wire.beginTransmission(15);
-    Wire.write(SD1);
-    Wire.endTransmission();
-    Serial.println(SD1);
-    strcpy(SD1, ""); 
-    delay(500);
 
     /*//GPS
     TC.number_to_string(SDaux, _gps.get_latitude());
@@ -264,50 +216,6 @@ void StateMach::SAVE_ALL() {
     strcpy(SD1, ""); 
     delay(500);
 
-    //hMS5611      
-    /*TC.number_to_string(SDaux, _hms5611.getRawTemp());
-    TC.computeData(SD1, SDaux); //4
-    strcpy(SDaux, "");
-    Wire.write(SD1);
-    Wire.endTransmission();
-    delay(500);
-    strcpy(SD1, ""); 
-    TC.number_to_string(SDaux, _hms5611.getRawPressure());
-    TC.computeData(SD1, SDaux); // 7
-    strcpy(SDaux, "");*/
-
-    TC.number_to_string(SDaux, _hms5611.getRealTemp());
-    TC.computeData(SD1, SDaux); //4
-    strcpy(SDaux, "");
-    TC.number_to_string(SDaux, _hms5611.getRealPress());
-    TC.computeData(SD1, SDaux); // 7
-    strcpy(SDaux, "");
-    TC.number_to_string(SDaux, _hms5611.getAltitude());
-    TC.computeData(SD1, SDaux); //7
-    strcpy(SDaux, "");
-
-    Wire.beginTransmission(15);
-    Wire.write(SD1);
-    Wire.endTransmission();
-    Serial.println(SD1);
-    strcpy(SD1, "");
-    delay(500);
-
-    
-
-/*
-    //UVX
-    strcat(SD1, _uvx.get_UVA());
-    strcat(SD1, _uvx.get_UVB());
-    strcat(SD1, _uvx.get_UVC());
-
-    Wire.beginTransmission(7);
-    Wire.write(SD1);
-    Wire.endTransmission();
-    Serial.println(SD1);
-    strcpy(SD1, ""); 
-    delay(1000);
-    */
 }
 
 void StateMach::TELEMETRIA() {
@@ -316,9 +224,8 @@ void StateMach::TELEMETRIA() {
     TC.saveData(_gps.get_altitude());
     TC.saveData(_gps.get_speed());*/
 
-    TC.saveData(_hms5611.getRealTemp());
-    TC.saveData(_hlsm303.getMod());
-    TC.saveData(_gps.get_fix());
+    TC.saveData(_gps1.get_fix());
+    TC.saveData(_gps2.get_fix());
 
     Serial.println(TC.getStringTel());
 

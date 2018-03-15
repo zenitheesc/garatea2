@@ -24,6 +24,11 @@
 
 #define DHTTYPE DHT22
 
+#define ExposureModeAltitude 20000.0
+#define CloseWindowAltitude 25000.0
+#define RescueModeAltitude 2000.0
+#define MaxTimeCloseWindow 7200000
+
 class StateMach {
 private:
 	// Create Objects
@@ -32,10 +37,8 @@ private:
 	BUZZ _buzzer;
 	hServo _myServo;
 	UVX _uvx;	
-	hGPS _gps;
-	hMS5611 _hms5611;
-	hDS18B20 _hds18b20;
-	hLSM303 _hlsm303;
+	hGPS _gps1;
+	hGPS _gps2;
 	hComm _hcomm;
   	telemetria_controller TC;
   	NumericDiff ND;
@@ -55,8 +58,7 @@ private:
 
 public:
 	StateMach(): _dht(DHTPIN, DHTTYPE), _buzzer(BUZZPIN), 
-	_myServo(), _uvx(),	 _gps(), _hms5611() , _hds18b20(),
-	 _hlsm303(), _hcomm(), TC(), ND(1.0), IsF() {};
+	_myServo(), _uvx(),	 _gps1(), _gps2(), _hcomm(), TC(), ND(1.0), IsF() {};
 
 	void ClimbingMode();
 	void ExposureMode();
