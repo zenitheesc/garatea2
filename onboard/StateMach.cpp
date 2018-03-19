@@ -47,7 +47,7 @@ void StateMach::ClimbingMode(){
     Serial.println(contador);
 
     // State machine check (to exposure mode)
-    if (this->_gps1.get_altitude() > ExposureModeAltitude || this->_gps2.get_altitude() > ExposureModeAltitude/* BMP180 TBM */) {
+    if (this->_gps1.altitude.meters() > ExposureModeAltitude || this->_gps2.altitude.meters() > ExposureModeAltitude/* BMP180 TBM */) {
         // Opens exp window
         this->_myServo.OpenWindow();
 
@@ -68,14 +68,14 @@ void StateMach::ExposureMode(){
     TELEMETRIA();
 
     // Update angular coef data
-    IsF.guardar_medidaGPS(_gps1.get_altitude());
-    IsF.guardar_medidaGPS(_gps2.get_altitude());
+    IsF.guardar_medidaGPS(_gps1.altitude.meters());
+    IsF.guardar_medidaGPS(_gps2.altitude.meters());
 
-    ND.addData(_gps1.get_altitude());
-    ND.addData(_gps2.get_altitude());
+    ND.addData(_gps1.altitude.meters());
+    ND.addData(_gps2.altitude.meters());
 
     // Check if probe is falling
-    if (this->_gps1.get_altitude() > CloseWindowAltitude || this->_gps2.get_altitude() > CloseWindowAltitude/* BMP180 TBM */) {
+    if (this->_gps1.altitude.meters() > CloseWindowAltitude || this->_gps2.altitude.meters() > CloseWindowAltitude/* BMP180 TBM */) {
         if( IsF.isFallingBAR() || IsF.isFallingGPS() || ND.isFallingND() ) { 
             // Close exp window
             this->_myServo.CloseWindow();
@@ -85,7 +85,7 @@ void StateMach::ExposureMode(){
         }
 
         /* We no longer use an acelerometer (_hlsm303)
-        if(this->_gps.get_altitude() > 28000.0){
+        if(this->_gps.altitude.meters() > 28000.0){
             if(_hlsm303.getMod() < 2.0){
                 this->_myServo.CloseWindow();
                 this->_exposureMode = false;
@@ -106,7 +106,7 @@ void StateMach::FallingMode(){
     SAVE_ALL();
     TELEMETRIA();
 
-    if (_gps1.get_altitude() < RescueModeAltitude || _gps2.get_altitude() < RescueModeAltitude) {
+    if (_gps1.altitude.meters() < RescueModeAltitude || _gps2.altitude.meters() < RescueModeAltitude) {
         this->_fallingMode = false;
         this->_rescueMode = true;
     }
@@ -120,7 +120,11 @@ void StateMach::RescueMode(){
 void StateMach::START_ALL(){
     Serial.println("Inicializando sesores.");
     
+    _ss.begin(GPSBaud);
+    Serial.println(F("gps _ss ok"));
 
+    _ubk.begin(GPSBaud);
+    Serial.println(F("gps _ubk ok"));
     /*_gps.begin(9600);
     Serial.println(F("gps ok"));*/
 
@@ -166,7 +170,7 @@ void StateMach::SERIAL_PRINT_ALL(){
     Serial.println(_gps.get_latitude());
     Serial.println(_gps.get_longitude());
     Serial.println(_gps.get_speed());
-    Serial.println(_gps.get_altitude());*/
+    Serial.println(_gps.altitude.meters());*/
     
     
 }
@@ -186,7 +190,7 @@ void StateMach::SAVE_ALL() {
     TC.number_to_string(SDaux, _gps.get_speed());
     TC.computeData(SD1, SDaux); //5
     strcpy(SDaux, "");
-    TC.number_to_string(SDaux, _gps.get_altitude());
+    TC.number_to_string(SDaux, _gps.altitude.meters());
     TC.computeData(SD1, SDaux); //7
     strcpy(SDaux, "");
 
@@ -221,11 +225,11 @@ void StateMach::SAVE_ALL() {
 void StateMach::TELEMETRIA() {
    /* TC.saveData(_gps.get_latitude());
     TC.saveData(_gps.get_longitude());
-    TC.saveData(_gps.get_altitude());
+    TC.saveData(_gps.altitude.meters());
     TC.saveData(_gps.get_speed());*/
 
-    TC.saveData(_gps1.get_fix());
-    TC.saveData(_gps2.get_fix());
+    /*TC.saveData(_gps1.isValid());
+    TC.saveData(_gps2.isValid());*/
 
     Serial.println(TC.getStringTel());
 

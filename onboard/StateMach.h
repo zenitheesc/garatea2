@@ -15,12 +15,22 @@
 #include "NumericDiff.h"
 #include "isFalling.h"
 #include <Wire.h>
+#include "TinyGPS++.h"
+#include <SoftwareSerial.h>
 
 
 // Pin Define
 #define DHTPIN 2 // Valor a ser corrigido
 #define BUZZPIN 4 // Valor a ser corrigido
 #define LMSPIN
+
+#define GPS_SS_TX 4
+#define GPS_SS_RX 3
+
+#define GPS_UBX_TX 11
+#define GPS_UBX_RX 10
+
+#define GPSBaud 9600
 
 #define DHTTYPE DHT22
 
@@ -37,8 +47,10 @@ private:
 	BUZZ _buzzer;
 	hServo _myServo;
 	UVX _uvx;	
-	hGPS _gps1;
-	hGPS _gps2;
+	TinyGPSPlus _gps1;
+	TinyGPSPlus _gps2;
+	SoftwareSerial _ss;
+	SoftwareSerial _ubk;
 	hComm _hcomm;
   	telemetria_controller TC;
   	NumericDiff ND;
@@ -58,7 +70,8 @@ private:
 
 public:
 	StateMach(): _dht(DHTPIN, DHTTYPE), _buzzer(BUZZPIN), 
-	_myServo(), _uvx(),	 _gps1(), _gps2(), _hcomm(), TC(), ND(1.0), IsF() {};
+	_myServo(),	 _gps1(), _gps2(), _ss(GPS_SS_RX, GPS_SS_TX),
+	 _ubk(GPS_UBX_RX, GPS_UBX_TX), _hcomm(), TC(), ND(1.0), IsF() {};
 
 	void ClimbingMode();
 	void ExposureMode();
