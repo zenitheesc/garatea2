@@ -1,4 +1,5 @@
 <h1 align="center" style="color:white; background-color:black">Garatea 2</h1>
+<h4 align="center">Zenith's second probe</h4>
 
 <p align="center">
 	<a href="http://zenith.eesc.usp.br/">
