@@ -1,5 +1,6 @@
+
 <h1 align="center" style="color:white; background-color:black">Garatea 2</h1>
-<h4 align="center">Zenith's second probe</h4>
+<h4 align="center">Our aerospace probes are attached to balloons filled with helium, carrying astrobiological experiments to the stratosphere, which is crucial so we can have a better understanding about how organisms can survive in space.</h4>
 
 <p align="center">
 	<a href="http://zenith.eesc.usp.br/">
@@ -32,24 +33,25 @@
 </p>
 
 <p align="center">
-    <a href="#environment-and-tools">Environment and Tools</a> •
+    <a href="#what-are-aerospace-probes">What are aerospace probes?</a> •
     <a href="#steps-to-run-and-debug">Steps to run and debug</a> •
     <a href="#how-to-contribute">How to contribute?</a> •
 </p>
 
-## Environment and tools
+## What are aerospace probes?
 
-`Add list of dependencies and software needed to run this project (if possible add the versions that were used in development).`
+ Our aerospace probes are balloons filled with helium, carrying astrobiological experiments to the stratosphere, which is crucial so we can have a better understanding about how organisms can survive in space.
 
-## Steps to run and debug
+Although they are part of a greater scientific experiment, the probes themselves are also fascinating from the point of view of embedded systems development. Our probes are equiped with microcontrolers, radios, sensors and cameras; every mission we aim to improve our systems so we can make the next mission even more efficient.
 
-`A simple list of steps indicating how one can run and test the project.`
+And, to sustain all our experiments and systems, we build reliable and reusable structures, that let us go to space multiple times. 
 
-## How to contribute
+## Details
+| Launch Date |Max Altitude|Experiments|
+|--|--|--|
+| 19/12/2016 | 25,5 km |Bacteria Resistance testing & Biomolecules degradation pattern analysis|
 
-`(optional, depends on the project) list of simple rules to help people work on the project.`
 
-`Examples: How to format a pull request\n How to format an issue`
 
 ---
 
