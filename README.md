@@ -12,7 +12,7 @@
     <a href="https://github.com/zenitheesc/garatea2/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/zenitheesc/garatea2?style=for-the-badge"/>
     </a>
-    <a href="https://github.com/${{ env.REPOSITORY_FULL_NAME }}/issues">
+    <a href="https://github.com/zenitheesc/garatea2/issues">
     <img src="https://img.shields.io/github/issues/zenitheesc/garatea2?style=for-the-badge"/>
     </a>
     <a href="https://github.com/zenitheesc/garatea2/commits/main">
