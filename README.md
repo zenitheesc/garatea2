@@ -34,8 +34,7 @@
 
 <p align="center">
     <a href="#what-are-aerospace-probes">What are aerospace probes?</a> •
-    <a href="#steps-to-run-and-debug">Steps to run and debug</a> •
-    <a href="#how-to-contribute">How to contribute?</a> •
+    <a href="#detailsg">Details</a> •
 </p>
 
 ## What are aerospace probes?
