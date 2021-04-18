@@ -34,6 +34,7 @@
 
 <p align="center">
     <a href="#what-are-aerospace-probes">What are aerospace probes?</a> •
+    <a href="#project">Project</a> •
     <a href="#details">Details</a> 
 </p>
 
