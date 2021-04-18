@@ -7,7 +7,6 @@ hComm::hComm(){
 void hComm::send_Data(int i){
 	Wire.beginTransmission(8);
 	// Code goes here
-	// Wire.write("si fude");
 	Wire.endTransmission();
 }
 

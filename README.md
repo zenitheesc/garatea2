@@ -45,6 +45,14 @@ Although they are part of a greater scientific experiment, the probes themselves
 
 And, to sustain all our experiments and systems, we build reliable and reusable structures, that let us go to space multiple times. 
 
+## Project
+
+After Garatéa-1, our primary goal was to increase the quality of our Space Probes. The Embedded System Architecture was based on an Atmega. In software, we decide to pure C without the use of the Arduino functions, but we also permit the use of C++ during development. We also use Arduino Watchdog Timer. 
+
+In our previous Space Probe, the sensors reads were not constant, because we didn't have solar panels. Now that we do, energy-saving was no longer an issue for us. So, we were able to make many reads. That was also our first try to use GitHub for code versioning. 
+
+The structure was made with Kapton, Aeronautic Depron, 3D printing and Glass Fiber. 
+
 ## Details
 | Launch Date |Max Altitude|Experiments|
 |--|--|--|
