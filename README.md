@@ -1,5 +1,5 @@
 
-<h1 align="center" style="color:white; background-color:black">Garatea 2</h1>
+<h1 align="center" style="color:white; background-color:black">Garatéa 2</h1>
 <h4 align="center">Our aerospace probes are attached to balloons filled with helium, carrying astrobiological experiments to the stratosphere, which is crucial so we can have a better understanding about how organisms can survive in space.</h4>
 
 <p align="center">
@@ -61,7 +61,7 @@ The structure was made with Kapton, Aeronautic Depron, 3D printing and Glass Fib
 | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|
 |<img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://raw.githubusercontent.com/zenitheesc/garatea2/assets/photo1.webp"> |  <img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://raw.githubusercontent.com/zenitheesc/garatea2/assets/photo2.webp">|<img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://raw.githubusercontent.com/zenitheesc/garatea2/assets/photo3.webp">|
-|<img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://raw.githubusercontent.com/zenitheesc/garatea2/assets/photo4.webp">  |  <img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://raw.githubusercontent.com/zenitheesc/garatea2/assets/photo5.webp">|
+|<img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://raw.githubusercontent.com/zenitheesc/garatea2/assets/photo4.webp">  |  <img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://raw.githubusercontent.com/zenitheesc/garatea2/assets/photo5.webp">| <img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://raw.githubusercontent.com/zenitheesc/garatea2/assets/photo6.webp">|
 
 ---
 
